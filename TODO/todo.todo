@@ -1,0 +1,115 @@
+
+MUST DOWNLOAD EXTENSION FIRST todo+ 
+https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus
+
+How to use Todo?:
+    - Alt+enter - To create checkbox
+    - Alt+D     - To check the checkbox
+
+----------------------------------------
+
+ITP222 Act 3 (MUST TO DO FOR NOW) DEADLINE MAY 15, 2025:
+    ☐ Same as requirements in Final Project
+    IMPORTANT:
+        ☐ Working Authentication (Login/Signup) 
+            Navigate to Dashboard/Homepage upon successfull log in
+        ☐ Registered Users on Database
+
+ITP222 Final Project:
+    ☐ 1. Teach members to use git
+    ☐ 2. Wireframing
+    ☐ 3. Create a design/ui for the project
+        ☐ a. Tech stack 
+        ☐ b. Tech stack         
+        ✔ c. Tech stack @done(05-12-25 00:02)
+        ☐ d. Tech Stack
+    ☐ 4. Think about what content what will be inside
+
+            Tech Stack A (Thinking):
+                ☐ 4. Setup Laravel (using herd/xampp)
+                ☐ 5. Setup NextJs
+                ☐ 6. Connect NextJs + Laravel
+
+            Tech Stack B (Thinking):
+                ☐ 4. Setup Directories (Vanilla PHP)
+
+            Tech Stack C (Thinking):
+                ☐ 4. Setup Laravel
+                ☐ 5. Setup Inertia Js
+                ☐ 6. Setup done Laravel + InertiaJS
+
+            Tech Stack D (Thinking):
+                ☐ 4. Reuse reference project
+                ☐ 5. debug project
+
+        Technicals:
+            ☐ Authentication
+        
+        UI/UX Requirement:
+            ☐ Responsiveness
+
+        Requirements:
+
+            Sign Up Page Checklist:
+                ☐ I. Clarity and Simplicity: (SUBJECTIVE):
+                    [5] Clear Call to Action: Is it obvious what the user needs to do (e.g., "Sign Up," "Create Account," "Get Started")?
+                    [5] Concise Form: Is the form only asking for essential information?
+                    [5] Minimal Distractions: Are there unnecessary links, images, or text that could divert attention?
+                    [5] Clear Headlines and Labels: Are the purpose of the page and each field easy to understand?
+                    [5] Responsiveness: Does the page display and function correctly on different screen sizes?
+                ☐ II. Form Fields and Input:
+                    [5] Appropriate Input Types: Are the correct input types used for each field (e.g., email for email addresses, password fields masked)?
+                    [5] Clear Placeholders or Examples: Do placeholders or examples help users understand what to enter?
+                    [5] Password Requirements: Are password requirements clearly stated (e.g., minimum length, special characters)?
+                    [5] Email Validation: Is there real-time validation to ensure the email address is in the correct format? (N/A)
+                    [5] Error Handling: Are errors clearly displayed and easy to understand, guiding users on how to fix them?
+                    [5] Optional Fields Indication: Are optional fields clearly marked?
+                    [5] Terms and Conditions/Privacy Policy Link: Are links to the terms and conditions and privacy policy clearly visible and accessible before submission?
+                ☐ III. User Experience and Trust:
+                    [5] Easy Navigation: Is it clear what happens after submitting the form?
+                    [5] Success Confirmation: Is there a clear confirmation message upon successful sign-up?
+                    [5] Redirection: Is the user redirected to the appropriate next step after signing up?
+                ☐ IV. Technical Aspects:
+                    [5] Form Submission: Does the form submit correctly and reliably?
+                    [5] Data Security: Is user data handled securely according to privacy policies?
+                    [5] Performance: Does the page load quickly?
+                ☐ V. Accessibility: (SUBJECTIVE):
+                    [5] Keyboard Navigation: Can all elements of the form be accessed using the keyboard?
+                    [5] Screen Reader Compatibility: Is the form structured in a way that is understandable for screen readers?
+                    [5] Sufficient Color Contrast: Is there sufficient color contrast between text and background?
+                    [5] Clear Focus Indicators: Are focus indicators visible when navigating through form elements?
+
+            LOGIN MODULE Functionality: 
+                ☐ Core Functionality:
+                    [5] User can successfully log in with valid credentials.
+                    [5] User can log in with username or email.
+                    [5] "Forgot password" functionality is present and working.
+                    [5] User is redirected to the correct page after successful login.
+                    [5] User is shown an appropriate error message for invalid credentials.
+                    [5] User is able to see the password.
+                ☐ Extra Functionality:
+                    [5] Account lock-out after multiple failed login attempts.
+                    [5] Clear and helpful error messages for all possible login errors. Security
+                ☐ Password Security:
+                    [5] Password input field masks the password.
+                    [5] Password complexity requirements are enforced (if applicable).
+                    Design & Usability (SUBJECTIVE)
+                ☐ User Experience:
+                    [5] The login page is easy to find and access.
+                    [5] The login form is clear, concise, and easy to use.
+                    [5] Labels and instructions are clear and helpful.
+                    [5] Error messages are informative and easy to understand.
+                ☐ Visual Design: (SUBJECTIVE):
+                    [5] The login page is visually appealing and consistent with the overall website design.
+                    [5] The layout is clean and uncluttered.
+                    [5] The page is responsive and works well on different screen sizes.
+                    [5] Uses appropriate colors and fonts.
+                ☐ Accessibility:(SUBJECTIVE):
+                    [5] The login page is accessible to users with disabilities (e.g., screen reader compatibility).
+                    [5] Sufficient color contrast between text and background.
+                    [5] Form elements are properly labeled for screen readers.
+
+DEADLINE: -- THIS MUST BE FINISHED BEFORE MAY 22 2025-- : 
+    ☐ FINISH PROJECT
+
+            
