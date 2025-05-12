@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Title modification on app/controllers/HomeController.php -->
     <title><?= $title ?></title>
 </head>
 <body>
