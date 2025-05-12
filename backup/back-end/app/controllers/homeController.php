@@ -1,22 +1,12 @@
 <?php
-
 namespace App\Controllers;
 
-use App\Models\User;
+use Core\Controller;
 
-class HomeController
+class HomeController extends Controller
 {
     public function index()
     {
-        echo "Welcome to the PHP MVC!";
-    }
-
-    public function users()
-    {
-        $user = new User();
-        $users = $user->getAll();
-
-        header('Content-Type: application/json');
-        echo json_encode($users);
+        $this->view('home', ['title' => 'Welcome to MVC']);
     }
 }
