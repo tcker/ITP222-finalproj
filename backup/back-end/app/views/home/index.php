@@ -1,0 +1,1 @@
+<h1>Hello from the Home View!</h1>
