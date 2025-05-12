@@ -15,7 +15,7 @@ http://localhost/ITP222-finalproj/backup/finalproj_bckp/public/
 │
 ├── app/                      → Core application logic
 │   ├── controllers/          → Handles requests and calls models/views
-│	│    └── homeController.php
+│   │   └── homeController.php
 │   ├── models/               → Business logic and database interaction
 │   │    └── user.php
 │   ├── views/                → HTML templates or JSON output
