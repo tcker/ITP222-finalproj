@@ -62,9 +62,6 @@ class AuthController extends Controller {
         }
     }
 
-
-
-
     public function forgot() {
         $this->view('forgot-password');
     }

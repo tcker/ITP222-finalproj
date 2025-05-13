@@ -57,7 +57,7 @@ ITP222 Final Project:
                     [5] Minimal Distractions: Are there unnecessary links, images, or text that could divert attention?
                     [5] Clear Headlines and Labels: Are the purpose of the page and each field easy to understand?
                     [5] Responsiveness: Does the page display and function correctly on different screen sizes?
-                ☐ II. Form Fields and Input:
+                ✔ II. Form Fields and Input: @done(05-14-25 04:05)
                     [5] Appropriate Input Types: Are the correct input types used for each field (e.g., email for email addresses, password fields masked)?
                     [5] Clear Placeholders or Examples: Do placeholders or examples help users understand what to enter?
                     [5] Password Requirements: Are password requirements clearly stated (e.g., minimum length, special characters)?
@@ -80,14 +80,14 @@ ITP222 Final Project:
                     [5] Clear Focus Indicators: Are focus indicators visible when navigating through form elements?
 
             LOGIN MODULE Functionality: 
-                ☐ Core Functionality:
+                ✔ Core Functionality: @done(05-14-25 04:06)
                     [5] User can successfully log in with valid credentials.
                     [5] User can log in with username or email.
                     [5] "Forgot password" functionality is present and working.
                     [5] User is redirected to the correct page after successful login.
                     [5] User is shown an appropriate error message for invalid credentials.
                     [5] User is able to see the password.
-                ☐ Extra Functionality:
+                ✔ Extra Functionality: @done(05-14-25 04:05)
                     [5] Account lock-out after multiple failed login attempts.
                     [5] Clear and helpful error messages for all possible login errors. Security
                 ☐ Password Security:
