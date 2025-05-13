@@ -46,5 +46,30 @@ class User extends Model {
         $stmt = $this->db->prepare("UPDATE users SET reset_token = NULL, token_expires_at = NULL WHERE email = ?");
         return $stmt->execute([$email]);
     }
+
+    public function isAccountLocked($email) {
+        $stmt = $this->db->prepare("SELECT locked_until FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result && $result['locked_until'] && strtotime($result['locked_until']) > time();
+    }
+
+    public function incrementFailedAttempts($email) {
+        $stmt = $this->db->prepare("UPDATE users SET failed_attempts = failed_attempts + 1 WHERE email = ?");
+        return $stmt->execute([$email]);
+    }
+
+    public function lockAccount($email, $lockDuration = '30 MINUTE') {
+        $stmt = $this->db->prepare("UPDATE users SET locked_until = NOW() + INTERVAL $lockDuration WHERE email = ?");
+        return $stmt->execute([$email]);
+    }
+
+    public function resetFailedAttempts($email) {
+        $stmt = $this->db->prepare("UPDATE users SET failed_attempts = 0, locked_until = NULL WHERE email = ?");
+        return $stmt->execute([$email]);
+    }
+
+
+
 }
 ?>

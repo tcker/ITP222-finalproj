@@ -34,13 +34,36 @@ class AuthController extends Controller {
         $password = $_POST['password'];
         $found = $user->findByUsernameOrEmail($input);
 
-        if ($found && password_verify($password, $found['password'])) {
-            $_SESSION['user'] = $found;
-            header("Location: homepage.php");
+        if ($found) {
+            if ($user->isAccountLocked($found['email'])) {
+                echo "Your account is locked due to multiple failed login attempts. Please try again later.";
+                return;
+            }
+
+            if (password_verify($password, $found['password'])) {
+                $user->resetFailedAttempts($found['email']); 
+                $_SESSION['user'] = $found;
+                header("Location: homepage.php");
+                exit;
+            } else {
+                $user->incrementFailedAttempts($found['email']); 
+
+                $remainingAttempts = 5 - $found['failed_attempts'];
+                if ($remainingAttempts <= 0) {
+                    $user->lockAccount($found['email']); 
+                    echo "Your account is locked due to multiple failed login attempts. Please try again later.";
+                    return;
+                }
+
+                echo "Invalid credentials. You have $remainingAttempts attempt(s) remaining. <a href='index.php?uri=login'>Try again</a>";
+            }
         } else {
             echo "Invalid credentials. <a href='index.php?uri=login'>Try again</a>";
         }
     }
+
+
+
 
     public function forgot() {
         $this->view('forgot-password');
@@ -81,8 +104,8 @@ class AuthController extends Controller {
         }
 
         // Debugging puposes
-        echo "PHP Timezone: " . date_default_timezone_get();
-        echo "<br>PHP Time Now: " . date('Y-m-d H:i:s') . "<br>";
+        // echo "PHP Timezone: " . date_default_timezone_get();
+        // echo "<br>PHP Time Now: " . date('Y-m-d H:i:s') . "<br>";
 
         $token = $_GET['token'];
 
