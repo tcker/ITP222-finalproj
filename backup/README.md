@@ -11,7 +11,7 @@ http://localhost/ITP222-finalproj/backup/back-end/public/
 <h1 align="center">File Structure</h1>
 
 back-end/
-├── index.php
+│
 ├── core/
 │   ├── Controller.php
 │   └── Model.php
@@ -23,8 +23,9 @@ back-end/
 │   ├── signup.php
 │   ├── login.php
 │   └── success.php
-└── database.db
-
+├── homepage.php
+├── index.php
+└── logout.php
 <h1 align="center">File Structure</h1>
 
 </pre>

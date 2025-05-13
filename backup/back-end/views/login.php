@@ -24,7 +24,7 @@
       </div>
       <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">Login</button>
       <div class="text-right text-sm">
-        <a href="#" class="text-blue-500 hover:underline">Forgot Password?</a>
+      <a href="index.php?uri=forgot-password" class="text-blue-500 hover:underline">Forgot Password?</a>
       </div>
       <div class="text-center text-sm text-gray-600 pt-4">
         Don't have an account? 
