@@ -1,6 +1,7 @@
 <?php
 require_once 'core/Controller.php';
 require_once 'models/User.php';
+
 class AuthController extends Controller {
     public function signup() {
         $this->view('signup');
@@ -8,8 +9,18 @@ class AuthController extends Controller {
 
     public function register() {
         $user = new User();
-        $user->create($_POST['username'], $_POST['email'], $_POST['password']);
-        header('Location: index.php?uri=success');
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        if (strlen($password) < 6) {
+            echo "Password must be at least 6 characters. <a href='index.php?uri=signup'>Back</a>";
+            return;
+        }
+
+        $user->create($username, $email, $password);
+        header("Location: index.php?uri=login");
+        exit;
     }
 
     public function login() {
@@ -17,14 +28,17 @@ class AuthController extends Controller {
     }
 
     public function authenticate() {
-        $userModel = new User();
-        $user = $userModel->findByEmailOrUsername($_POST['username']);
-        if ($user && password_verify($_POST['password'], $user['password'])) {
-            header('Location: index.php?uri=success');
+        session_start();
+        $user = new User();
+        $input = $_POST['username'];
+        $password = $_POST['password'];
+        $found = $user->findByUsernameOrEmail($input);
+
+        if ($found && password_verify($password, $found['password'])) {
+            $_SESSION['user'] = $found;
+            header("Location: homepage.php");
         } else {
-            echo "<p style='color:red;'>Invalid credentials</p>";
-            $this->view('login');
+            echo "Invalid credentials. <a href='index.php?uri=login'>Try again</a>";
         }
     }
 }
-?>
