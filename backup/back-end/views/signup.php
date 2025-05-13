@@ -21,7 +21,7 @@
       <div>
         <label class="block text-sm font-medium text-gray-700">Password</label>
         <input type="password" name="password" placeholder="Min 6 characters" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" />
-        <p class="text-xs text-gray-500 mt-1">Password must be at least 6 characters long.</p>
+        <p class="text-xs text-gray-500 mt-1">Password must be at least 6 characters long. With special characters</p>
       </div>
       <div class="flex items-center space-x-2">
         <input type="checkbox" required class="h-4 w-4 text-blue-600 border-gray-300 rounded" />

@@ -22,6 +22,18 @@ switch ($uri) {
     case 'success':
         include 'views/success.php';
         break;
+    case 'forgot':
+        $auth->forgot();
+        break;
+    case 'handle-forgot':
+        $auth->handleForgot();
+        break;
+    case 'reset':
+        $auth->reset();
+        break;
+    case 'handle-reset':
+        $auth->handleReset();
+        break;
     default:
         echo "404 Page Not Found";
 }
