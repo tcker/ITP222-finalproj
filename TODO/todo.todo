@@ -11,12 +11,12 @@ How to use Todo?:
 ITP222 Act 3 (MUST TO DO FOR NOW) DEADLINE MAY 15, 2025:
     ☐ Same as requirements in Final Project
     IMPORTANT:
-        ☐ Working Authentication (Login/Signup) 
+        ✔ Working Authentication (Login/Signup) @done(05-13-25 14:31)
             Navigate to Dashboard/Homepage upon successfull log in
         ☐ Registered Users on Database
 
 ITP222 Final Project:
-    ☐ 1. Teach members to use git
+    ✔ 1. Teach members to use git @done(05-13-25 14:30)
     ☐ 2. Wireframing
     ☐ 3. Create a design/ui for the project
         ☐ a. Tech stack 
@@ -31,12 +31,12 @@ ITP222 Final Project:
                 ☐ 6. Connect NextJs + Laravel
 
             Tech Stack B (Thinking):
-                ☐ 4. Setup Directories (Vanilla PHP)
+                ✔ 4. Setup Directories (Vanilla PHP) @done(05-13-25 14:30)
 
             Tech Stack C (Thinking):
-                ☐ 4. Setup Laravel
-                ☐ 5. Setup Inertia Js
-                ☐ 6. Setup done Laravel + InertiaJS
+                ✔ 4. Setup Laravel @done(05-12-25 14:30)
+                ✔ 5. Setup Inertia Js @done(05-12-25 14:30)
+                ✔ 6. Setup done Laravel + InertiaJS @done(05-12-25 14:30)
 
             Tech Stack D (Thinking):
                 ☐ 4. Reuse reference project
