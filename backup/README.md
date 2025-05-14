@@ -12,25 +12,20 @@ http://localhost/ITP222-finalproj/backup/back-end/public/
 
 back-end/
 │
-├── public/                 # Web root
-│   └── index.php           # Entry point
-│
-├── app/
-│   ├── controllers/        # Controller classes
-│   │   └── HomeController.php
-│   ├── models/             # Models
-│   │   └── User.php
-│   └── views/              # Views
-│       └── home.php
-│
-├── core/                   # Core classes (Router, Controller base, etc.)
-│   ├── App.php
+├── core/
 │   ├── Controller.php
-│   └── Router.php
-│
-├── vendor/                 # Composer dependencies
-├── composer.json           # Composer config
-└── .htaccess               # For Apache routing
+│   └── Model.php
+├── controllers/
+│   └── AuthController.php
+├── models/
+│   └── User.php
+├── views/
+│   ├── signup.php
+│   ├── login.php
+│   └── success.php
+├── homepage.php
+├── index.php
+└── logout.php
 
 <h1 align="center">File Structure</h1>
 
