@@ -81,11 +81,57 @@ class AuthController extends Controller {
 
             $_SESSION['reset_email'] = $email;
 
-            // Output reset link (for testing)
             $link = "http://localhost/ITP222-finalproj/backup/back-end/index.php?uri=reset&token=$token";
-            echo "Reset link (for testing): <a href='$link'>$link</a>";
+
+            echo <<<HTML
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Reset Link</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            </head>
+            <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+            <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md text-center space-y-4">
+                <h2 class="text-xl font-semibold text-green-600">Reset Link Generated</h2>
+                <p class="text-gray-700">Click the button below to reset your password:</p>
+                <a 
+                href="$link" 
+                class="inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition"
+                >
+                Reset Password
+                </a>
+                <p class="text-xs text-gray-400">For testing purposes only — do not share this link.</p>
+            </div>
+            </body>
+            </html>
+            HTML;
+
         } else {
-            echo "Email not found. <a href='index.php?uri=forgot'>Try again</a>";
+            echo <<<HTML
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Email Not Found</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            </head>
+            <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+            <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md text-center space-y-4">
+                <h2 class="text-xl font-semibold text-red-600">Email Not Found</h2>
+                <p class="text-gray-700">We couldn't find an account with that email.</p>
+                <a 
+                href="index.php?uri=forgot" 
+                class="inline-block px-4 py-2 bg-gray-300 text-black font-medium rounded hover:bg-gray-400 transition"
+                >
+                Try Again
+                </a>
+            </div>
+            </body>
+            </html>
+            HTML;
         }
     }
 
@@ -100,28 +146,29 @@ class AuthController extends Controller {
             return;
         }
 
-        // Debugging puposes
-        // echo "PHP Timezone: " . date_default_timezone_get();
-        // echo "<br>PHP Time Now: " . date('Y-m-d H:i:s') . "<br>";
-
-        $token = $_GET['token'];
-
         if (!isset($_SESSION['reset_email'])) {
             echo "Email session expired. Please try again.";
             return;
         }
 
+        $token = $_GET['token'];
         $email = $_SESSION['reset_email'];
+
         $user = new User();
         $found = $user->findByResetTokenAndEmail($token, $email);
 
         if ($found) {
-            echo "Token valid for: " . $found['email'];
-            $this->view('reset-password');
+            // Here, $found will be populated by the data returned from the database
+            // Example of how $found can be used (assuming it's an associative array)
+            // $found = ['email' => 'example@email.com'];
+
+            // Pass the found email to the view
+            $this->view('reset-password', ['email' => $found['email']]);
         } else {
             echo "Invalid or expired token. <a href='index.php?uri=forgot'>Try again</a>";
         }
     }
+
 
     public function handleReset() {
         session_start();
@@ -153,6 +200,31 @@ class AuthController extends Controller {
         $user->clearResetToken($email);
 
         echo "Password updated successfully. <a href='index.php?uri=login'>Login</a>";
+
+          echo <<<HTML
+                      <!DOCTYPE html>
+            <html lang="en">
+            <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Email Not Found</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            </head>
+            <body>
+            <div class='flex items-center justify-center min-h-screen bg-zinc-900'>
+                <div class='bg-zinc-800 text-white p-8 rounded-md shadow-md max-w-sm w-full'>
+                <h2 class='text-2xl font-semibold mb-4'>Password Updated Successfully</h2>
+                <p class='text-sm text-gray-400 mb-4'>
+                    Your password has been updated. You can now login with your new password.
+                </p>
+                <a href='index.php?uri=login' class='block text-center text-lg font-semibold text-white bg-blue-600 rounded-md py-2 hover:bg-blue-700 transition'>
+                    Login
+                </a>
+                </div>
+            </div>
+            </body>
+            </html>
+            HTML;
     }
 }
 ?>

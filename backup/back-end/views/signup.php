@@ -10,7 +10,6 @@
 
   <div class="flex flex-col md:flex-row w-full h-screen">
     
-    <!-- Left Panel -->
     <div class="hidden md:flex md:w-1/2 bg-zinc-900 p-10 flex-col justify-between">
       <div class="text-lg font-semibold flex items-center gap-2">
         <span class="text-xl">⌘</span> Compass
@@ -21,7 +20,6 @@
       </blockquote>
     </div>
 
-    <!-- Right Panel -->
     <div class="w-full md:w-1/2 bg-zinc-950 p-8 md:p-16 flex items-center justify-center">
       <div class="w-full max-w-md p-8 md:p-10">
         <div class="text-center mb-6">
