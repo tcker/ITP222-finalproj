@@ -120,16 +120,16 @@
     <h2 class="text-xl font-bold mb-4 text-white">Terms & Privacy Policy</h2>
     <div class="text-sm text-gray-300 max-h-60 overflow-y-auto space-y-4">
       <p>
-        By creating an account, you agree to our Terms of Service and Privacy Policy. We are committed to protecting your data and ensuring transparency in how we handle your personal information.
+        By creating an account, you agree to our Travel Terms and Privacy Policy. We’re dedicated to making your journey safe, enjoyable, and respectful of your privacy.
       </p>
       <p>
-        <strong>Terms of Service:</strong> You must be at least 18 years old above to use this service. Do not use the platform for illegal activities. Violation of terms may result in account suspension.
+        <strong>Terms of Service:</strong> You must be 18 years or older to use our travel platform. Use the site responsibly no booking or sharing of illegal or harmful content. We reserve the right to suspend accounts violating our guidelines to keep the community safe and fun.
       </p>
       <p>
-        <strong>Privacy Policy:</strong> We collect your username, email, and password to create your account. Your data is securely stored and never shared with third parties without your consent.
+        <strong>Privacy Policy:</strong> We collect your username, email, and password to personalize your travel experience and manage your bookings. Your information is protected with strong security measures and won’t be shared with third parties without your permission.
       </p>
       <p>
-        For more details, please contact our support team.
+        Ready to explore? If you have questions, our travel support team is here to help!
       </p>
     </div>
     <div class="mt-6 text-right">
