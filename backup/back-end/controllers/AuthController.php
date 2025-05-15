@@ -27,40 +27,47 @@ class AuthController extends Controller {
         $this->view('login');
     }
 
-    public function authenticate() {
-        session_start();
-        $user = new User();
-        $input = $_POST['username'];
-        $password = $_POST['password'];
-        $found = $user->findByUsernameOrEmail($input);
+public function authenticate() {
+    session_start();
+    $user = new User();
+    $input = $_POST['username'];
+    $password = $_POST['password'];
+    $found = $user->findByUsernameOrEmail($input);
 
-        if ($found) {
-            if ($user->isAccountLocked($found['email'])) {
-                echo "Your account is locked due to multiple failed login attempts. Please try again later.";
-                return;
-            }
-
-            if (password_verify($password, $found['password'])) {
-                $user->resetFailedAttempts($found['email']); 
-                $_SESSION['user'] = $found;
-                header("Location: homepage.php");
-                exit;
-            } else {
-                $user->incrementFailedAttempts($found['email']); 
-
-                $remainingAttempts = 5 - $found['failed_attempts'];
-                if ($remainingAttempts <= 0) {
-                    $user->lockAccount($found['email']); 
-                    echo "Your account is locked due to multiple failed login attempts. Please try again later.";
-                    return;
-                }
-
-                echo "Invalid credentials. You have $remainingAttempts attempt(s) remaining. <a href='index.php?uri=login'>Try again</a>";
-            }
-        } else {
-            echo "Invalid credentials. <a href='index.php?uri=login'>Try again</a>";
+    if ($found) {
+        if ($user->isAccountLocked($found['email'])) {
+            $_SESSION['login_error'] = "Your account is locked due to multiple failed login attempts. Please try again later.";
+            header("Location: index.php?uri=login");
+            exit;
         }
+
+        if (password_verify($password, $found['password'])) {
+            $user->resetFailedAttempts($found['email']); 
+            $_SESSION['user'] = $found;
+            header("Location: homepage.php");
+            exit;
+        } else {
+            $user->incrementFailedAttempts($found['email']); 
+
+            $remainingAttempts = 5 - $found['failed_attempts'];
+            if ($remainingAttempts <= 0) {
+                $user->lockAccount($found['email']); 
+                $_SESSION['login_error'] = "Your account is locked due to multiple failed login attempts. Please try again later.";
+                header("Location: index.php?uri=login");
+                exit;
+            }
+
+            $_SESSION['login_error'] = "Invalid credentials. You have $remainingAttempts attempt(s) remaining.";
+            header("Location: index.php?uri=login");
+            exit;
+        }
+    } else {
+        $_SESSION['login_error'] = "Invalid credentials.";
+        header("Location: index.php?uri=login");
+        exit;
     }
+}
+
 
     public function forgot() {
         $this->view('forgot-password');

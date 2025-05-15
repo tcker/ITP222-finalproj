@@ -1,3 +1,9 @@
+<?php 
+  session_start();
+  $loginError = $_SESSION['login_error'] ?? null;
+  unset($_SESSION['login_error']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +14,21 @@
   <script src="https://unpkg.com/@heroicons/vue@2.0.0-beta.6/dist/heroicons.min.js"></script>
 </head>
 <body class="bg-black text-white min-h-screen flex items-stretch justify-center">
+
+<?php if ($loginError): ?>
+  <div id="errorModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+    <div class="bg-zinc-900 p-6 rounded-lg max-w-md w-full text-white space-y-4">
+      <h3 class="text-xl font-semibold">Login Error</h3>
+      <p class="text-red-500"><?= htmlspecialchars($loginError) ?></p>
+      <button 
+        onclick="document.getElementById('errorModal').style.display='none'" 
+        class="mt-4 bg-white text-black px-4 py-2 rounded hover:bg-gray-300"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+<?php endif; ?>
 
   <div class="flex flex-col md:flex-row w-full h-screen">
     
