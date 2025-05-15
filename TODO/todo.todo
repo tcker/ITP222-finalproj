@@ -51,7 +51,7 @@ ITP222 Final Project:
         Requirements:
 
             Sign Up Page Checklist:
-                ☐ I. Clarity and Simplicity: (SUBJECTIVE):
+                ✔ I. Clarity and Simplicity: (SUBJECTIVE): @done(05-15-25 15:50)
                     [5] Clear Call to Action: Is it obvious what the user needs to do (e.g., "Sign Up," "Create Account," "Get Started")?
                     [5] Concise Form: Is the form only asking for essential information?
                     [5] Minimal Distractions: Are there unnecessary links, images, or text that could divert attention?
@@ -65,7 +65,7 @@ ITP222 Final Project:
                     [5] Error Handling: Are errors clearly displayed and easy to understand, guiding users on how to fix them?
                     [5] Optional Fields Indication: Are optional fields clearly marked?
                     [5] Terms and Conditions/Privacy Policy Link: Are links to the terms and conditions and privacy policy clearly visible and accessible before submission?
-                ☐ III. User Experience and Trust:
+                ✔ III. User Experience and Trust: @done(05-15-25 15:50)
                     [5] Easy Navigation: Is it clear what happens after submitting the form?
                     [5] Success Confirmation: Is there a clear confirmation message upon successful sign-up?
                     [5] Redirection: Is the user redirected to the appropriate next step after signing up?
@@ -73,7 +73,7 @@ ITP222 Final Project:
                     [5] Form Submission: Does the form submit correctly and reliably?
                     [5] Data Security: Is user data handled securely according to privacy policies?
                     [5] Performance: Does the page load quickly?
-                ☐ V. Accessibility: (SUBJECTIVE):
+                ✔ V. Accessibility: (SUBJECTIVE): @done(05-15-25 15:50)
                     [5] Keyboard Navigation: Can all elements of the form be accessed using the keyboard?
                     [5] Screen Reader Compatibility: Is the form structured in a way that is understandable for screen readers?
                     [5] Sufficient Color Contrast: Is there sufficient color contrast between text and background?
@@ -94,17 +94,17 @@ ITP222 Final Project:
                     [5] Password input field masks the password.
                     [5] Password complexity requirements are enforced (if applicable).
                     Design & Usability (SUBJECTIVE)
-                ☐ User Experience:
+                ✔ User Experience: @done(05-15-25 15:50)
                     [5] The login page is easy to find and access.
                     [5] The login form is clear, concise, and easy to use.
                     [5] Labels and instructions are clear and helpful.
                     [5] Error messages are informative and easy to understand.
-                ☐ Visual Design: (SUBJECTIVE):
+                ✔ Visual Design: (SUBJECTIVE): @done(05-15-25 15:50)
                     [5] The login page is visually appealing and consistent with the overall website design.
                     [5] The layout is clean and uncluttered.
                     [5] The page is responsive and works well on different screen sizes.
                     [5] Uses appropriate colors and fonts.
-                ☐ Accessibility:(SUBJECTIVE):
+                ✔ Accessibility:(SUBJECTIVE): @done(05-15-25 15:50)
                     [5] The login page is accessible to users with disabilities (e.g., screen reader compatibility).
                     [5] Sufficient color contrast between text and background.
                     [5] Form elements are properly labeled for screen readers.
