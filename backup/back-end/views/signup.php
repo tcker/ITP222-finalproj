@@ -10,11 +10,11 @@
   <div class="flex flex-col md:flex-row w-full h-screen">
   <div class="hidden md:flex md:w-1/2 bg-zinc-900 p-0 relative overflow-hidden">
     <div id="slideshow" class="absolute inset-0 z-0">
-      <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/silenthill.png" class="fade-img absolute w-full h-full object-cover opacity-100 transition-opacity duration-1000" />
-      <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/japan.jpg" class="fade-img absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" />
       <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/arthur.png" class="fade-img absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" />
       <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/gost.jpg" class="fade-img absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" />
       <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/eld.jpg" class="fade-img absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" />
+      <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/silenthill.png" class="fade-img absolute w-full h-full object-cover opacity-100 transition-opacity duration-1000" />
+      <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/japan.jpg" class="fade-img absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" />
     </div>
 
     <div class="z-10 relative p-10 flex flex-col justify-between bg-transparent">
