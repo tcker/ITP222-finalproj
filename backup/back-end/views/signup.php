@@ -58,19 +58,30 @@
             onclick="togglePassword()" 
             class="absolute right-3 top-3 text-sm text-gray-400 hover:text-white"
           >
-            <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5">
+            <!-- Eye Open -->
+            <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7
+                  a10.056 10.056 0 012.877-4.43M15 12a3 3 0 00-3-3m0 0a3 3 0 00-3 3
+                  m3-3l6 6M3 3l18 18" />
+            </svg>
+
+            <!-- Eye Slash (Initially hidden) -->
+            <svg id="eye-closed" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                 d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.478 0-8.268-2.943-9.542-7z" />
             </svg>
           </button>
           <p class="text-xs text-gray-500 mt-1 ml-1">Password must be at least 6 characters with special characters.</p>
         </div>
 
+         
+
         <div class="flex items-start space-x-2 text-sm text-gray-300">
           <input type="checkbox" required class="mt-1 h-4 w-4 text-white bg-zinc-800 border-zinc-600 rounded" />
-          <label>I agree to the <a href="#" class="text-white underline">Terms</a> & <a href="#" class="text-white underline">Privacy</a></label>
+          <label>I agree to the <a href="javascript:void(0);" onclick="toggleModal()" class="text-white underline">Terms & Privacy</a> </label>
         </div>
 
         <button 
@@ -89,22 +100,61 @@
   </div>
 </div>
 
-  <script>
-    function togglePassword() {
-      const passwordField = document.getElementById('password');
-      const eyeIcon = document.getElementById('eye-icon');
-      const isPassword = passwordField.getAttribute('type') === 'password';
+<div id="termsModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+  <div class="bg-zinc-900 rounded-xl shadow-lg max-w-lg w-full p-6 relative">
+    <button 
+      onclick="toggleModal()" 
+      class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold"
+      aria-label="Close"
+    >
+      &times;
+    </button>
+    <h2 class="text-xl font-bold mb-4 text-white">Terms & Privacy Policy</h2>
+    <div class="text-sm text-gray-300 max-h-60 overflow-y-auto space-y-4">
+      <p>
+        By creating an account, you agree to our Terms of Service and Privacy Policy. We are committed to protecting your data and ensuring transparency in how we handle your personal information.
+      </p>
+      <p>
+        <strong>Terms of Service:</strong> You must be at least 18 years old above to use this service. Do not use the platform for illegal activities. Violation of terms may result in account suspension.
+      </p>
+      <p>
+        <strong>Privacy Policy:</strong> We collect your username, email, and password to create your account. Your data is securely stored and never shared with third parties without your consent.
+      </p>
+      <p>
+        For more details, please contact our support team.
+      </p>
+    </div>
+    <div class="mt-6 text-right">
+      <button 
+        onclick="toggleModal()" 
+        class="bg-white text-black px-4 py-2 rounded hover:bg-gray-200 transition"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>
 
-      passwordField.setAttribute('type', isPassword ? 'text' : 'password');
-      eyeIcon.innerHTML = isPassword 
-      ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.478 0-8.268-2.943-9.542-7z" />
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />`
-      : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.056 10.056 0 012.877-4.43M15 12a3 3 0 00-3-3m0 0a3 3 0 00-3 3m3-3l6 6M3 3l18 18" />`
-    }
-  </script>
+
+    <script>
+        function togglePassword() {
+          const password = document.getElementById('password');
+          const eyeOpen = document.getElementById('eye-open');
+          const eyeClosed = document.getElementById('eye-closed');
+
+          const isPassword = password.type === 'password';
+          password.type = isPassword ? 'text' : 'password';
+
+          eyeOpen.classList.toggle('hidden', isPassword);
+          eyeClosed.classList.toggle('hidden', !isPassword);
+        }
+
+        function toggleModal() {
+          const modal = document.getElementById('termsModal');
+          modal.classList.toggle('hidden');
+        }
+    </script>
+
 
 </body>
 </html>

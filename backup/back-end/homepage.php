@@ -14,7 +14,6 @@ $user = $_SESSION['user'];
   <title>Homepage</title>
 </head>
 <body>
-  <h2>Welcome, <?= htmlspecialchars($user['username']) ?>!</h2>
   <p>You are now logged in.</p>
   <form action="logout.php" method="POST">
     <button type="submit">Logout</button>

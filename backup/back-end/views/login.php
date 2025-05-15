@@ -40,7 +40,8 @@
             class="w-full rounded-md bg-transparent border border-zinc-700 p-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-blue-500"
           />
           
-          <div class="relative">
+        <!-- Password Field with Toggle -->
+        <div class="relative">
           <input 
             type="password" 
             id="password" 
@@ -49,19 +50,28 @@
             required 
             class="w-full rounded-md bg-transparent border border-zinc-700 p-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-blue-500"
           />
-            <button 
-              type="button" 
-              onclick="togglePassword()" 
-              class="absolute right-3 top-3 text-gray-400 hover:text-white"
-            >
-              <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                  d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.478 0-8.268-2.943-9.542-7z" />
-              </svg>
-            </button>
-          </div>
+          <button 
+            type="button" 
+            onclick="togglePassword()" 
+            class="absolute right-3 top-3 text-gray-400 hover:text-white"
+          >
+            <!-- Eye Open -->
+            <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7
+                  a10.056 10.056 0 012.877-4.43M15 12a3 3 0 00-3-3m0 0a3 3 0 00-3 3
+                  m3-3l6 6M3 3l18 18" />
+            </svg>
+
+            <!-- Eye Slash (Initially hidden) -->
+            <svg id="eye-closed" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.478 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </button>
+        </div>
 
           <div class="text-right text-sm">
             <a href="index.php?uri=forgot" class="text-gray-400 hover:underline">Forgot Password?</a>
@@ -84,23 +94,19 @@
 
   </div>
 
-  <script>
-    function togglePassword() {
-      const passwordField = document.getElementById('password');
-      const icon = document.getElementById('eye-icon');
-      const isPassword = passwordField.type === 'password'
-      passwordField.type = isPassword ? 'text' : 'password';
+    <script>
+      function togglePassword() {
+        const password = document.getElementById('password');
+        const eyeOpen = document.getElementById('eye-open');
+        const eyeClosed = document.getElementById('eye-closed');
 
-      icon.innerHTML = isPassword 
-        ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.478 0-8.268-2.943-9.542-7z" />`
-        : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.056 10.056 0 012.877-4.43M15 12a3 3 0 00-3-3m0 0a3 3 0 00-3 3m3-3l6 6M3 3l18 18" />`;
+        const isPassword = password.type === 'password';
+        password.type = isPassword ? 'text' : 'password';
 
-    }
-  </script>
+        eyeOpen.classList.toggle('hidden', isPassword);
+        eyeClosed.classList.toggle('hidden', !isPassword);
+      }
+    </script>
 
 </body>
 </html>
