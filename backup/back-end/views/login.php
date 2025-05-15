@@ -44,7 +44,7 @@
           <input 
             type="text" 
             name="username" 
-            placeholder="Username" 
+            placeholder="Username or Email" 
             required 
             class="w-full rounded-md bg-transparent border border-zinc-700 p-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-blue-500"
           />
