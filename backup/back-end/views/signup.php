@@ -1,3 +1,8 @@
+<?php
+  $errorMessage = $_GET['error'] ?? null;
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,6 +148,8 @@
   </div>
 </div>
 
+<div id="toast" class="fixed bottom-5 right-5 bg-red-600 text-white px-5 py-3 rounded shadow-lg opacity-0 transition-opacity duration-300"></div>
+
 
     <script>
         function togglePassword() {
@@ -178,7 +185,22 @@
           }
 
           showNextImage();
-          setInterval(showNextImage, 4000); // change every 4 seconds
+          setInterval(showNextImage, 4000); 
+
+            function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.opacity = '1';
+
+            setTimeout(() => {
+              toast.style.opacity = '0';
+            }, 2000); // Hide after 4 seconds
+          }
+
+          const errorMessage = <?php echo json_encode($errorMessage); ?>;
+          if (errorMessage) {
+            showToast(errorMessage);
+          }
     </script>
 
 

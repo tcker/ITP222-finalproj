@@ -14,14 +14,32 @@ class AuthController extends Controller {
         $password = $_POST['password'];
 
         if (strlen($password) < 6) {
-            echo "Password must be at least 6 characters. <a href='index.php?uri=signup'>Back</a>";
-            return;
+            header("Location: index.php?uri=signup&error=" . urlencode("Password must be at least 6 characters."));
+            exit;
+        }
+        if (!preg_match('/[A-Z]/', $password)) {
+            header("Location: index.php?uri=signup&error=" . urlencode("Password must contain at least one uppercase letter."));
+            exit;
+        }
+        if (!preg_match('/[a-z]/', $password)) {
+            header("Location: index.php?uri=signup&error=" . urlencode("Password must contain at least one lowercase letter."));
+            exit;
+        }
+        if (!preg_match('/\d/', $password)) {
+            header("Location: index.php?uri=signup&error=" . urlencode("Password must contain at least one number."));
+            exit;
+        }
+        if (!preg_match('/[\W_]/', $password)) {
+            header("Location: index.php?uri=signup&error=" . urlencode("Password must contain at least one special character."));
+            exit;
         }
 
         $user->create($username, $email, $password);
         header("Location: index.php?uri=login");
         exit;
     }
+
+
 
     public function login() {
         $this->view('login');
