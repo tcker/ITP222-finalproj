@@ -11,16 +11,25 @@
 
   <div class="flex flex-col md:flex-row w-full h-screen">
     
-    <!-- Left Panel -->
-    <div class="hidden md:flex md:w-1/2 bg-zinc-900 p-10 flex-col justify-between">
-      <div class="text-lg font-semibold flex items-center gap-2">
-        <span class="text-xl">⌘</span> Compass
+  <div class="hidden md:flex md:w-1/2 bg-zinc-900 p-0 relative overflow-hidden">
+    <div id="slideshow" class="absolute inset-0 z-0">
+      <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/silenthill.png" class="fade-img absolute w-full h-full object-cover opacity-100 transition-opacity duration-1000" />
+      <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/japan.jpg" class="fade-img absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" />
+      <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/arthur.png" class="fade-img absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" />
+      <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/gost.jpg" class="fade-img absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" />
+      <img src="http://localhost/ITP222-finalproj/backup/back-end/CSS/Assets/eld.jpg" class="fade-img absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000" />
+    </div>
+
+    <div class="z-10 relative p-10 flex flex-col justify-between bg-transparent">
+      <div class="text-3xl font-semibold flex items-center gap-2">
+        <span class="text-4xl">⌘ Compass
       </div>
-      <blockquote class="text-sm text-gray-400 mt-auto">
+      <blockquote class="text-sm text-white mt-auto">
         "The journey of a thousand miles begins with a single step."  
-        <footer class="mt-2 text-xs text-gray-500">- Lao Tzu</footer>
+        <footer class="mt-2 text-xs text-white">- Lao Tzu</footer>
       </blockquote>
     </div>
+  </div>
 
     <!-- Right Panel -->
     <div class="w-full md:w-1/2 bg-zinc-950 flex items-center justify-center">
@@ -106,6 +115,24 @@
         eyeOpen.classList.toggle('hidden', isPassword);
         eyeClosed.classList.toggle('hidden', !isPassword);
       }
+
+        let current = 0;
+        const images = document.querySelectorAll("#slideshow .fade-img");
+
+        function showNextImage() {
+          images.forEach((img, i) => {
+            img.classList.remove("opacity-100");
+            img.classList.add("opacity-0");
+          });
+
+          images[current].classList.remove("opacity-0");
+          images[current].classList.add("opacity-100");
+
+          current = (current + 1) % images.length;
+        }
+
+        showNextImage();
+        setInterval(showNextImage, 4000); // change every 4 seconds
     </script>
 
 </body>
