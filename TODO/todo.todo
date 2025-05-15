@@ -9,7 +9,7 @@ How to use Todo?:
 ----------------------------------------
 
 ITP222 Act 3 (MUST TO DO FOR NOW) DEADLINE MAY 15, 2025:
-    ☐ Same as requirements in Final Project
+    ✔ Same as requirements in Final Project @done(05-15-25 16:23)
     IMPORTANT:
         ✔ Working Authentication (Login/Signup) @done(05-13-25 14:31)
             Navigate to Dashboard/Homepage upon successfull log in
@@ -17,18 +17,18 @@ ITP222 Act 3 (MUST TO DO FOR NOW) DEADLINE MAY 15, 2025:
 
 ITP222 Final Project:
     ✔ 1. Teach members to use git @done(05-13-25 14:30)
-    ☐ 2. Wireframing
-    ☐ 3. Create a design/ui for the project
+    ✔ 2. Wireframing @done(05-15-25 16:24)
+    ✔ 3. Create a design/ui for the project @done(05-15-25 16:24)
         ☐ a. Tech stack 
         ✔ b. Tech stack @done(05-12-25 14:19 | FOR BACKUP PROJECT) 
         ✔ c. Tech stack @done(05-12-25 00:02)
         ☐ d. Tech Stack
-    ☐ 4. Think about what content what will be inside
+    ✔ 4. Think about what content what will be inside @done(05-15-25 16:24)
 
-            Tech Stack A (Thinking):
-                ☐ 4. Setup Laravel (using herd/xampp)
-                ☐ 5. Setup NextJs
-                ☐ 6. Connect NextJs + Laravel
+                                        Tech Stack A (Thinking):
+                                            ☐ 4. Setup Laravel (using herd/xampp)
+                                            ☐ 5. Setup NextJs
+                                            ☐ 6. Connect NextJs + Laravel
 
             Tech Stack B (Thinking):
                 ✔ 4. Setup Directories (Vanilla PHP) @done(05-13-25 14:30)
@@ -38,15 +38,15 @@ ITP222 Final Project:
                 ✔ 5. Setup Inertia Js @done(05-12-25 14:30)
                 ✔ 6. Setup done Laravel + InertiaJS @done(05-12-25 14:30)
 
-            Tech Stack D (Thinking):
-                ☐ 4. Reuse reference project
-                ☐ 5. debug project
+                                        Tech Stack D (Thinking):
+                                            ☐ 4. Reuse reference project
+                                            ☐ 5. debug project
 
         Technicals:
-            ☐ Authentication
+            ✔ Authentication @done(05-15-25 16:24)
         
         UI/UX Requirement:
-            ☐ Responsiveness
+            ✔ Responsiveness @done(05-15-25 16:24)
 
         Requirements:
 
@@ -90,7 +90,7 @@ ITP222 Final Project:
                 ✔ Extra Functionality: @done(05-14-25 04:05)
                     [5] Account lock-out after multiple failed login attempts.
                     [5] Clear and helpful error messages for all possible login errors. Security
-                ☐ Password Security:
+                ✔ Password Security: @done(05-15-25 16:23)
                     [5] Password input field masks the password.
                     [5] Password complexity requirements are enforced (if applicable).
                     Design & Usability (SUBJECTIVE)
