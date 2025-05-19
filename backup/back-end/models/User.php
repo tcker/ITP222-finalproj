@@ -30,6 +30,7 @@ class User extends Model {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+
     public function findByResetToken($token) {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE reset_token = ? AND token_expires_at > NOW()");
         $stmt->execute([$token]);
@@ -68,6 +69,24 @@ class User extends Model {
         $stmt = $this->db->prepare("UPDATE users SET failed_attempts = 0, locked_until = NULL WHERE email = ?");
         return $stmt->execute([$email]);
     }
+
+
+
+    public function setOTP($email, $otp, $expires) {
+    $stmt = $this->db->prepare("UPDATE users SET otp_code = ?, otp_expires_at = ? WHERE email = ?");
+    return $stmt->execute([$otp, $expires, $email]);
+    }
+
+    public function findByEmailAndOTP($email, $otp) {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ? AND otp_code = ? AND otp_expires_at > NOW()");
+        $stmt->execute([$email, $otp]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function clearOTP($email) {
+        $stmt = $this->db->prepare("UPDATE users SET otp_code = NULL, otp_expires_at = NULL WHERE email = ?");
+        return $stmt->execute([$email]);
+}
 
 
 

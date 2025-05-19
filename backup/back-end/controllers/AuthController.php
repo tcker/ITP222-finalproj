@@ -1,6 +1,7 @@
 <?php
 require_once 'core/Controller.php';
 require_once 'models/User.php';
+require_once 'mailer.php';
 
 class AuthController extends Controller {
     public function signup() {
@@ -87,78 +88,111 @@ public function authenticate() {
 }
 
 
+    public function verifyOTP() {
+        $this->view('verify-otp'); // Make a simple HTML form asking for OTP input
+    }
+
+
     public function forgot() {
         $this->view('forgot-password');
     }
 
     public function handleForgot() {
-        session_start(); 
+    session_start();
+    require_once 'mailer.php';
 
-        $email = $_POST['email'];
-        $user = new User();
-        $existing = $user->findByEmail($email);
+    $email = $_POST['email'];
+    $user = new User();
+    $existing = $user->findByEmail($email);
 
-        if ($existing) {
-            $token = bin2hex(random_bytes(16));
-            $expires = date('Y-m-d H:i:s', strtotime('+10 hour'));
+    if ($existing) {
+        $otp = random_int(100000, 999999);
+        $expires = date('Y-m-d H:i:s', strtotime('+10 minutes'));
 
-            $user->setResetToken($email, $token, $expires);
+        $user->setOTP($email, $otp, $expires);
 
-            $_SESSION['reset_email'] = $email;
+        if (sendOTPEmail($email, $otp)) {
+            $_SESSION['otp_email'] = $email;
 
-            $link = "http://localhost/ITP222-finalproj/backup/back-end/index.php?uri=reset&token=$token";
-
-            echo <<<HTML
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Reset Link</title>
-            <script src="https://cdn.tailwindcss.com"></script>
-            </head>
-            <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-            <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md text-center space-y-4">
-                <h2 class="text-xl font-semibold text-green-600">Reset Link Generated</h2>
-                <p class="text-gray-700">Click the button below to reset your password:</p>
-                <a 
-                href="$link" 
-                class="inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition"
-                >
-                Reset Password
-                </a>
-                <p class="text-xs text-gray-400">For testing purposes only — do not share this link.</p>
-            </div>
-            </body>
-            </html>
-            HTML;
-
+            header("Location: index.php?uri=verify-otp");
+            exit;
         } else {
-            echo <<<HTML
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Email Not Found</title>
-            <script src="https://cdn.tailwindcss.com"></script>
-            </head>
-            <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-            <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md text-center space-y-4">
-                <h2 class="text-xl font-semibold text-red-600">Email Not Found</h2>
-                <p class="text-gray-700">We couldn't find an account with that email.</p>
-                <a 
-                href="index.php?uri=forgot" 
-                class="inline-block px-4 py-2 bg-gray-300 text-black font-medium rounded hover:bg-gray-400 transition"
-                >
-                Try Again
-                </a>
-            </div>
-            </body>
-            </html>
-            HTML;
+            echo "Failed to send OTP email. Try again.";
         }
+    } else {
+        echo "Email not found.";
     }
+}
+
+
+    // public function handleForgot() {
+    //     session_start(); 
+
+    //     $email = $_POST['email'];
+    //     $user = new User();
+    //     $existing = $user->findByEmail($email);
+
+    //     if ($existing) {
+    //         $token = bin2hex(random_bytes(16));
+    //         $expires = date('Y-m-d H:i:s', strtotime('+10 hour'));
+
+    //         $user->setResetToken($email, $token, $expires);
+
+    //         $_SESSION['reset_email'] = $email;
+
+    //         $link = "http://localhost/ITP222-finalproj/backup/back-end/index.php?uri=reset&token=$token";
+
+    //         echo <<<HTML
+    //         <!DOCTYPE html>
+    //         <html lang="en">
+    //         <head>
+    //         <meta charset="UTF-8">
+    //         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    //         <title>Reset Link</title>
+    //         <script src="https://cdn.tailwindcss.com"></script>
+    //         </head>
+    //         <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    //         <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md text-center space-y-4">
+    //             <h2 class="text-xl font-semibold text-green-600">Reset Link Generated</h2>
+    //             <p class="text-gray-700">Click the button below to reset your password:</p>
+    //             <a 
+    //             href="$link" 
+    //             class="inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition"
+    //             >
+    //             Reset Password
+    //             </a>
+    //             <p class="text-xs text-gray-400">For testing purposes only — do not share this link.</p>
+    //         </div>
+    //         </body>
+    //         </html>
+    //         HTML;
+
+    //     } else {
+    //         echo <<<HTML
+    //         <!DOCTYPE html>
+    //         <html lang="en">
+    //         <head>
+    //         <meta charset="UTF-8">
+    //         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    //         <title>Email Not Found</title>
+    //         <script src="https://cdn.tailwindcss.com"></script>
+    //         </head>
+    //         <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    //         <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md text-center space-y-4">
+    //             <h2 class="text-xl font-semibold text-red-600">Email Not Found</h2>
+    //             <p class="text-gray-700">We couldn't find an account with that email.</p>
+    //             <a 
+    //             href="index.php?uri=forgot" 
+    //             class="inline-block px-4 py-2 bg-gray-300 text-black font-medium rounded hover:bg-gray-400 transition"
+    //             >
+    //             Try Again
+    //             </a>
+    //         </div>
+    //         </body>
+    //         </html>
+    //         HTML;
+    //     }
+    // }
 
 
     public function reset() {

@@ -34,6 +34,18 @@ switch ($uri) {
     case 'handle-reset':
         $auth->handleReset();
         break;
+    case 'forgot':
+        $auth->forgot();
+        break;
+    case 'handle-forgot':
+        $auth->handleForgot();
+        break;
+    case 'verify-otp':
+        $auth->verifyOTP(); 
+        break;
+    case 'handle-verify-otp':
+        $auth->handleVerifyOTP();
+        break;
     default:
         echo "404 Page Not Found";
 }
