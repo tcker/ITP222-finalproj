@@ -52,10 +52,3 @@ CREATE TABLE IF NOT EXISTS users (
 
 
 </pre>
-
-### To run Laravel proj 
-- paste this url in your browser
-
-```bash
-http://localhost/ITP222-finalproj/ITP222-finalproj/public
-```
