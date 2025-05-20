@@ -78,17 +78,35 @@ class User extends Model {
     }
 
     public function findByEmailAndOTP($email, $otp) {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ? AND otp_code = ? AND otp_expires_at > NOW()");
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ? AND otp_code = ?");
         $stmt->execute([$email, $otp]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            echo "NO MATCH with just email and otp.<br>";
+            return false;
+        }
+
+        // Check expiration manually
+        if (strtotime($result['otp_expires_at']) <= time()) {
+            echo "OTP expired.<br>";
+            return false;
+        }
+
+        return $result;
     }
+
+
 
     public function clearOTP($email) {
         $stmt = $this->db->prepare("UPDATE users SET otp_code = NULL, otp_expires_at = NULL WHERE email = ?");
         return $stmt->execute([$email]);
-}
+    }
 
-
+    public function verifyOTP($email, $inputOtp) {
+        $user = $this->findByEmailAndOTP($email, $inputOtp);
+        return $user !== false;
+    }
 
 }
 ?>

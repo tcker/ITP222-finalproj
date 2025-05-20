@@ -1,3 +1,6 @@
+<?php $email = $email ?? ''; ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -2,7 +2,9 @@
 class Controller {
     public function view($view, $data = []) {
         extract($data);
-        include "views/{$view}.php";
+        include __DIR__ . "/../views/{$view}.php";
+
     }
+    
 }
 ?>

@@ -46,6 +46,9 @@ switch ($uri) {
     case 'handle-verify-otp':
         $auth->handleVerifyOTP();
         break;
+    case 'reset-password':
+        include 'views/reset-password.php'; 
+        break;
     default:
         echo "404 Page Not Found";
 }
