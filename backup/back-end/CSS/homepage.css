@@ -1,0 +1,68 @@
+    @font-face {
+      font-family: 'Neue Montreal';
+      src: url('fonts/NeueMontreal-Regular.woff2') format('woff2'),
+           url('fonts/NeueMontreal-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Neue Montreal';
+      src: url('fonts/NeueMontreal-Bold.woff2') format('woff2'),
+           url('fonts/NeueMontreal-Bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    body {
+      font-family: 'Neue Montreal', sans-serif;
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    #background-slider {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -10;
+    }
+
+    #background-slider img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      transition: opacity 1s ease-in-out;
+      opacity: 0;
+      filter: brightness(0.5);
+    }
+
+    #background-slider img.opacity-100 {
+      opacity: 0.4;
+    }
+
+    nav a, nav div > a {
+      font-family: 'Neue Montreal', sans-serif;
+      font-weight: 400; 
+    }
+
+    main.fixed-compass {
+      position: fixed;
+      bottom: 3rem; 
+      left: 3rem;   
+      pointer-events: none; 
+      z-index: 10;
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+    body {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
