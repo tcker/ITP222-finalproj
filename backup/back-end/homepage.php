@@ -17,81 +17,73 @@ $user = $_SESSION['user'];
   <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
-<body class="min-h-screen relative">
+<body>
 
-  <!-- Background Slider -->
-  <div id="background-slider">
-    <img src="CSS/Assets/arthur.png" alt="Slide 1" class="opacity-100" />
-    <img src="CSS/Assets/japan.jpg" alt="Slide 2" />
-    <img src="CSS/Assets/mayon.png" alt="Slide 3" />
-  </div>
-
-  <header class="w-full py-6 flex justify-center relative z-20">
-    <nav class="relative w-full flex items-center text-white text-sm font-normal px-6 max-w-7xl mx-auto">
-      <div class="absolute left-6 flex items-center space-x-2">
+  <header>
+    <nav class="flex w-full items-center text-white text-sm font-normal max-w-7xl mx-auto">
+      <div class="flex items-center space-x-2">
         <img src="CSS/Assets/compass_logo.gif" alt="Compass Logo" />
       </div>
 
-      <div class="flex mx-auto space-x-24 uppercase tracking-widest font-normal" style="font-family: 'Neue Montreal', sans-serif; font-weight: 400;">
-        <a href="trip-planner.php" class="hover:text-yellow-400">
-          Trip Planner
-        </a>
-        <a href="destinations.php" class="hover:text-yellow-400 cursor-pointer">
-          Destinations
-        </a>
-        <a href="travel-logs.php" class="hover:text-yellow-400 cursor-pointer">
-          Travel Logs
-        </a>
+      <div class="flex mx-auto space-x-24 uppercase tracking-widest font-normal">
+        <a href="./views/pages/trip-planner.php" class="hover:text-yellow-400">Trip Planner</a>
+        <a href="./views/pages/destinations.php" class="hover:text-yellow-400">Destinations</a>
+        <a href="./views/pages/travel-logs.php" class="hover:text-yellow-400">Travel Logs</a>
       </div>
 
-      <div class="absolute right-6 flex items-center space-x-4 font-normal" style="font-family: 'Neue Montreal', sans-serif; font-weight: 400;">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <div class="flex items-center space-x-4 font-normal">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 1118.878 6.196 9 9 0 015.12 17.804z" />
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
-        <div class="text-white text-sm">
-          <p>Welcome, <?= htmlspecialchars($user['username']) ?> !</p>
-        </div>
-        <form action="logout.php" method="POST" class="inline">
+        <div>Welcome, <?= htmlspecialchars($user['username']) ?> !</div>
+        <form action="logout.php" method="POST">
           <button type="submit" class="bg-yellow-400 text-black px-3 py-1 rounded hover:bg-yellow-300 transition">Logout</button>
         </form>
       </div>
     </nav>
   </header>
 
+  <section id="background-slider">
+    <img src="CSS/Assets/arthur.png" alt="Slide 1" class="opacity-100" />
+    <img src="CSS/Assets/japan.jpg" alt="Slide 2" />
+    <img src="CSS/Assets/mayon.png" alt="Slide 3" />
+    <div class="compass-title">Compass</div>
+  </section>
 
-  <main class="fixed-compass">
-    <h1
-      class="text-[15rem] font-extrabold leading-none drop-shadow-lg select-none"
-      style="font-family: 'Neue Montreal', sans-serif;"
-    >
-      Compass
-    </h1>
-  </main>
+<div class="content-wrapper">
+  <!-- <p class="text-lg">Welcome to Compass! Scroll down to explore the content.</p> -->
+</div>
+  <h2 class="text-3xl text-[#FFCC66] font-bold uppercase mb-8 px-6 max-w-7xl mx-auto">Learn More About:</h2>
 
-  <div class="pt-[100vh] px-12 max-w-4xl mx-auto space-y-8 text-white z-0 relative" style="background: transparent;">
-    <p class="text-lg">
-      Welcome to Compass! This placeholder content allows the page to be scrollable while the big Compass text and background images remain fixed in place.
-    </p>
-    <p class="text-lg">
-      Scroll down to see this text move, but the background and large heading stay fixed.
-    </p>
-    <p class="text-lg">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fermentum, odio non sodales sollicitudin, erat lacus pulvinar nisi, ac feugiat nulla nulla a turpis.
-    </p>
-    <p class="text-lg">
-      Vivamus luctus nec urna ut dictum. Curabitur euismod dolor vel lacus dapibus, vitae maximus nulla commodo.
-    </p>
-    <p class="text-lg">
-      More placeholder text here to fill up space...
-    </p>
-    <p class="text-lg">
-      Keep scrolling, keep exploring!
-    </p>
-    <p class="text-lg">
-      The big "Compass" text and background images won’t move as you scroll.
-    </p>
-  </div>
+<section class="learn-more bg-[#000000] text-white w-full border-t border-b border-[#333333] py-10">
+
+  <article class="tooltip border-t border-[#333333] max-w-7xl mx-auto px-6 py-6 relative cursor-pointer">
+    <h3 class="text-2xl font-semibold mb-2">Fly Fishing in the Mountains</h3>
+    <p class="text-[#CCCCCC]">You'll get a season guide and lots of dehydrated ravioli.</p>
+    <span class="tooltip-image">
+      <img src="CSS/Assets/outdoor.jpg" alt="Fly Fishing" />
+    </span>
+  </article>
+
+  <article class="tooltip border-t border-[#333333] max-w-7xl mx-auto px-6 py-6 relative cursor-pointer">
+    <h3 class="text-2xl font-semibold mb-2">Level 5 Rapids!</h3>
+    <p class="text-[#CCCCCC]">Put on your helmet and grab your wetsuit. It's time to conquer Siberia.</p>
+    <span class="tooltip-image">
+      <img src="CSS/Assets/rapids.jpg" alt="Level 5 Rapids" />
+    </span>
+  </article>
+
+  <article class="tooltip border-t border-[#333333] max-w-7xl mx-auto px-6 py-6 relative cursor-pointer">
+    <h3 class="text-2xl font-semibold mb-2">Puget Sound Kayaking</h3>
+    <p class="text-[#CCCCCC]">One week of ocean kayaking in the Puget Sound.</p>
+    <span class="tooltip-image">
+      <img src="CSS/Assets/kayakoudoor.jpg" alt="Puget Sound Kayaking" />
+    </span>
+  </article>
+</section>
+
+
 
   <script>
     const images = document.querySelectorAll('#background-slider img');
@@ -100,14 +92,51 @@ $user = $_SESSION['user'];
     function showNextImage() {
       images.forEach((img, i) => {
         img.classList.toggle('opacity-100', i === current);
-        img.classList.toggle('opacity-0', i !== current);
       });
       current = (current + 1) % images.length;
     }
 
     setInterval(showNextImage, 4000);
-  </script>
 
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const tooltips = document.querySelectorAll('.tooltip');
+
+    tooltips.forEach(tooltip => {
+      const tooltipImage = tooltip.querySelector('.tooltip-image');
+
+      tooltip.addEventListener('mouseenter', () => {
+        tooltipImage.style.visibility = 'visible';
+        tooltipImage.style.opacity = '1';
+      });
+
+      tooltip.addEventListener('mousemove', (e) => {
+        const offsetX = 20;
+        const offsetY = -tooltipImage.offsetHeight / 2;
+        let left = e.clientX + offsetX;
+        let top = e.clientY + offsetY;
+
+        if (left + tooltipImage.offsetWidth > window.innerWidth) {
+          left = e.clientX - tooltipImage.offsetWidth - offsetX;
+        }
+        if (top < 0) top = 0;
+        if (top + tooltipImage.offsetHeight > window.innerHeight) {
+          top = window.innerHeight - tooltipImage.offsetHeight;
+        }
+
+        tooltipImage.style.left = left + 'px';
+        tooltipImage.style.top = top + 'px';
+      });
+
+      tooltip.addEventListener('mouseleave', () => {
+        tooltipImage.style.visibility = 'hidden';
+        tooltipImage.style.opacity = '0';
+      });
+    });
+  });
+
+
+  </script>
 </body>
 </html>
 
@@ -116,3 +145,17 @@ $user = $_SESSION['user'];
         'CSS/homepage.css'; 
     ?>
 </style> 
+
+
+
+
+<!-- Primary colors:
+
+#993300
+#333333
+#000000
+#FFCC66
+#FFFFFF
+#006699 
+
+-->

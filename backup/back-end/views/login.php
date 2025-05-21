@@ -43,7 +43,7 @@
 
     <div class="z-10 relative p-10 flex flex-col justify-between bg-transparent">
       <div class="text-3xl font-semibold flex items-center gap-2">
-        <span class="text-4xl">⌘ Compass
+          <img src="CSS/Assets/compass_logo.gif" alt="Compass Logo" />
       </div>
       <blockquote class="text-sm text-white mt-auto">
         "The journey of a thousand miles begins with a single step."  
