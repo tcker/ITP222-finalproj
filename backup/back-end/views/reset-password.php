@@ -1,4 +1,27 @@
-<?php $email = $email ?? ''; ?>
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require_once realpath(__DIR__ . '/../core/Model.php');
+
+$model = new Model();
+$pdo = $model->getDB();
+
+$token = $_GET['token'] ?? '';
+
+$stmt = $pdo->prepare("SELECT * FROM users WHERE reset_token = ?");
+$stmt->execute([$token]);
+$debugUser = $stmt->fetch();
+
+if ($debugUser) {
+    echo "User found but token may be expired.<br>";
+    echo "Expires at: " . $debugUser['token_expires_at'];
+} else {
+    echo "No user found for token: $token";
+}
+
+$email = $debugUser['email'] ?? '';
+?>
 
 
 <!DOCTYPE html>
@@ -15,7 +38,8 @@
 
     <div class="bg-white p-6 rounded-lg shadow text-center w-full">
       <p class="text-lg font-medium text-gray-800">
-        Token valid for: <span class="text-blue-600"><?= htmlspecialchars($email) ?></span>
+        <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
+        <strong><?= htmlspecialchars($email) ?></strong>
       </p>
     </div>
 
@@ -28,8 +52,8 @@
       <!-- Error message container -->
       <div id="error-message" class="hidden mb-4 p-3 bg-red-100 text-red-700 rounded"></div>
 
-      <form id="reset-password-form" action="index.php?uri=handle-reset" method="POST" class="space-y-4" novalidate>
-        <input type="hidden" name="token" value="<?= htmlspecialchars($_GET['token'] ?? '') ?>" />
+    <form method="POST" action="index.php?uri=handle-reset">
+        <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
 
         <div class="space-y-2">
           <label for="new_password" class="block text-sm font-medium text-gray-700">New Password</label>

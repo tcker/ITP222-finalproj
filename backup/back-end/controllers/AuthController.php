@@ -93,7 +93,8 @@ class AuthController extends Controller {
         $this->view('verify-otp'); // Make a simple HTML form asking for OTP input
     }
 
-        public function handleVerifyOTP() {
+
+    public function handleVerifyOTP() {
         session_start();
 
         $otpInput = $_POST['otp'] ?? null;
@@ -105,16 +106,23 @@ class AuthController extends Controller {
         }
 
         $user = new User();
-        $isValid = $user->verifyOTP($email, $otpInput); 
+        $isValid = $user->verifyOTP($email, $otpInput);
 
         if ($isValid) {
-            // OTP verified, redirect to reset password or logged-in page
-            header("Location: index.php?uri=reset-password");
+            $token = bin2hex(random_bytes(16)); 
+            $expires = date('Y-m-d H:i:s', strtotime('+1000 minutes'));
+
+            $user->setResetToken($email, $token, $expires);
+
+            $_SESSION['reset_email'] = $email;
+
+            header("Location: index.php?uri=reset-password&token=" . urlencode($token) . "&email=" . urlencode($email));
             exit;
         } else {
             echo "Invalid OTP. <a href='index.php?uri=verify-otp'>Try again</a>";
         }
     }
+
 
 
     public function forgot() {
@@ -134,7 +142,7 @@ class AuthController extends Controller {
 
     if ($existing) {
         $otp = random_int(100000, 999999);
-        $expires = date('Y-m-d H:i:s', strtotime('+10 minutes'));
+        $expires = date('Y-m-d H:i:s', strtotime('+1000 minutes'));
 
         $user->setOTP($email, $otp, $expires);
 
@@ -151,36 +159,40 @@ class AuthController extends Controller {
     }
 }
 
+
     public function reset() {
         date_default_timezone_set('Asia/Manila');
 
         session_start();
 
-        // Check if token is provided in URL
-        if (!isset($_GET['token'])) {
+        $token = $_GET['token'] ?? null;
+        $email = $_GET['email'] ?? null;  
+
+        if (!$token || !$email) {
             echo "Invalid reset link. <a href='index.php?uri=forgot'>Try again</a>";
             return;
         }
-
-        // Check if the email is stored in session (set during OTP verification or forgot flow)
-        if (!isset($_SESSION['reset_email'])) {
-            echo "Email session expired. Please try again.";
-            return;
-        }
-
-        $token = $_GET['token'];
-        $email = $_SESSION['reset_email'];
 
         $user = new User();
         $found = $user->findByResetTokenAndEmail($token, $email);
 
         if ($found) {
-            // Pass the email to the view for reset-password page
-            $this->view('reset-password', ['email' => $found['email']]);
-        } else {
+            $expiresAt = strtotime($found['token_expires_at']);
+            $now = time();
+
+            if ($expiresAt < $now) {
+                $newExpiry = date('Y-m-d H:i:s', strtotime('+90 minutes'));
+                $user->setResetToken($email, $token, $newExpiry);
+            }
+
+            $_SESSION['reset_email'] = $email;
+            $this->view('reset-password', ['email' => $email, 'token' => $token]);
+        } 
+        else {
             echo "Invalid or expired token. <a href='index.php?uri=forgot'>Try again</a>";
         }
     }
+
 
 
 

@@ -37,9 +37,9 @@ switch ($uri) {
     case 'forgot':
         $auth->forgot();
         break;
-    case 'handle-forgot':
-        $auth->handleForgot();
-        break;
+    // case 'handle-forgot':
+    //     $auth->handleForgot();
+    //     break;
     case 'verify-otp':
         $auth->verifyOTP(); 
         break;
