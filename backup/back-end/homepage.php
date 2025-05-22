@@ -1,10 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION['user'])) {
-    header("Location: index.php?uri=login");
-    exit;
-}
-$user = $_SESSION['user'];
+include '../back-end/views/pages/navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,34 +10,8 @@ $user = $_SESSION['user'];
   <title>Compass Landing Page</title>
   <link rel="stylesheet" href="CSS/homepage.css"/>
   <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 <body>
-
-  <header>
-    <nav class="flex w-full items-center text-white text-sm font-normal max-w-7xl mx-auto">
-      <div class="flex items-center space-x-2">
-        <img src="CSS/Assets/compass_logo.gif" alt="Compass Logo" />
-      </div>
-
-      <div class="flex mx-auto space-x-24 uppercase tracking-widest font-normal">
-        <a href="./views/pages/trip-planner.php" class="hover:text-yellow-400">Trip Planner</a>
-        <a href="./views/pages/destinations.php" class="hover:text-yellow-400">Destinations</a>
-        <a href="./views/pages/travel-logs.php" class="hover:text-yellow-400">Travel Logs</a>
-      </div>
-
-      <div class="flex items-center space-x-4 font-normal">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 1118.878 6.196 9 9 0 015.12 17.804z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-        <div>Welcome, <?= htmlspecialchars($user['username']) ?> !</div>
-        <form action="logout.php" method="POST">
-          <button type="submit" class="bg-yellow-400 text-black px-3 py-1 rounded hover:bg-yellow-300 transition">Logout</button>
-        </form>
-      </div>
-    </nav>
-  </header>
 
   <section id="background-slider">
     <img src="CSS/Assets/arthur.png" alt="Slide 1" class="opacity-100" />
@@ -50,6 +19,11 @@ $user = $_SESSION['user'];
     <img src="CSS/Assets/mayon.png" alt="Slide 3" />
     <div class="compass-title">Compass</div>
   </section>
+
+  <div class="absolute top-1/3 right-10 text-right text-white max-w-xs">
+  <h3 class="text-2xl font-semibold text-[#FFCC66]">Your Travel Buddy</h3>
+  <p class="text-md text-white mt-2">Plan your adventures, discover destinations, and log unforgettable memories all in one place.</p>
+</div>
 
 <div class="content-wrapper">
   <!-- <p class="text-lg">Welcome to Compass! Scroll down to explore the content.</p> -->

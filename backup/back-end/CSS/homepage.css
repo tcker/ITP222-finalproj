@@ -6,31 +6,6 @@ body {
   padding: 0;
 }
 
-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 20;
-  padding: 1.5rem 3rem;
-  background: transparent; /* or #333333 for solid bg */
-}
-
-nav a,
-nav div > a {
-  color: #FFFFFF;
-  text-decoration: none;
-  margin-right: 3rem;
-  text-transform: uppercase;
-  font-weight: 400;
-  transition: color 0.3s;
-}
-
-nav a:hover,
-nav div > a:hover {
-  color: #FFCC66; /* soft gold on hover */
-}
-
 #background-slider {
   position: relative;
   width: 100%;
@@ -49,6 +24,10 @@ nav div > a:hover {
   transition: opacity 1s ease-in-out;
   filter: brightness(0.5);
   z-index: 1;
+}
+
+#background-slider {
+  position: relative;
 }
 
 #background-slider img.opacity-100 {
@@ -70,6 +49,7 @@ nav div > a:hover {
 
 .content-wrapper {
   max-width: 640px;
+  
   margin: 2rem auto 5rem auto;
   padding: 0 1.5rem;
   position: relative;
