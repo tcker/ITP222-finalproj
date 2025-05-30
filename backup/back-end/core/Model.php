@@ -10,4 +10,7 @@ class Model {
             die("DB Connection Failed: " . $e->getMessage());
         }
     }
+    public function getDB() {
+        return $this->db;
+    }
 }

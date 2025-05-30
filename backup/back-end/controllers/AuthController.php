@@ -1,6 +1,8 @@
 <?php
+
 require_once 'core/Controller.php';
 require_once 'models/User.php';
+require_once 'mailer.php';
 
 class AuthController extends Controller {
     public function signup() {
@@ -40,17 +42,17 @@ class AuthController extends Controller {
     }
 
 
-
     public function login() {
         $this->view('login');
     }
 
-public function authenticate() {
-    session_start();
-    $user = new User();
-    $input = $_POST['username'];
-    $password = $_POST['password'];
-    $found = $user->findByUsernameOrEmail($input);
+
+    public function authenticate() {
+        session_start();
+        $user = new User();
+        $input = $_POST['username'];
+        $password = $_POST['password'];
+        $found = $user->findByUsernameOrEmail($input);
 
     if ($found) {
         if ($user->isAccountLocked($found['email'])) {
@@ -87,112 +89,111 @@ public function authenticate() {
 }
 
 
-    public function forgot() {
-        $this->view('forgot-password');
+    public function verifyOTP() {
+        $this->view('verify-otp'); // Make a simple HTML form asking for OTP input
     }
 
-    public function handleForgot() {
-        session_start(); 
 
-        $email = $_POST['email'];
+    public function handleVerifyOTP() {
+        session_start();
+
+        $otpInput = $_POST['otp'] ?? null;
+        $email = $_SESSION['otp_email'] ?? null;
+
+        if (!$otpInput || !$email) {
+            echo "Invalid request. <a href='index.php?uri=verify-otp'>Try again</a>";
+            return;
+        }
+
         $user = new User();
-        $existing = $user->findByEmail($email);
+        $isValid = $user->verifyOTP($email, $otpInput);
 
-        if ($existing) {
-            $token = bin2hex(random_bytes(16));
-            $expires = date('Y-m-d H:i:s', strtotime('+10 hour'));
+        if ($isValid) {
+            $token = bin2hex(random_bytes(16)); 
+            $expires = date('Y-m-d H:i:s', strtotime('+1000 minutes'));
 
             $user->setResetToken($email, $token, $expires);
 
             $_SESSION['reset_email'] = $email;
 
-            $link = "http://localhost/ITP222-finalproj/backup/back-end/index.php?uri=reset&token=$token";
-
-            echo <<<HTML
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Reset Link</title>
-            <script src="https://cdn.tailwindcss.com"></script>
-            </head>
-            <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-            <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md text-center space-y-4">
-                <h2 class="text-xl font-semibold text-green-600">Reset Link Generated</h2>
-                <p class="text-gray-700">Click the button below to reset your password:</p>
-                <a 
-                href="$link" 
-                class="inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition"
-                >
-                Reset Password
-                </a>
-                <p class="text-xs text-gray-400">For testing purposes only — do not share this link.</p>
-            </div>
-            </body>
-            </html>
-            HTML;
-
+            header("Location: index.php?uri=reset-password&token=" . urlencode($token) . "&email=" . urlencode($email));
+            exit;
         } else {
-            echo <<<HTML
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Email Not Found</title>
-            <script src="https://cdn.tailwindcss.com"></script>
-            </head>
-            <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-            <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md text-center space-y-4">
-                <h2 class="text-xl font-semibold text-red-600">Email Not Found</h2>
-                <p class="text-gray-700">We couldn't find an account with that email.</p>
-                <a 
-                href="index.php?uri=forgot" 
-                class="inline-block px-4 py-2 bg-gray-300 text-black font-medium rounded hover:bg-gray-400 transition"
-                >
-                Try Again
-                </a>
-            </div>
-            </body>
-            </html>
-            HTML;
+            echo "Invalid OTP. <a href='index.php?uri=verify-otp'>Try again</a>";
         }
     }
 
 
+
+    public function forgot() {
+        $this->view('forgot-password');
+    }
+
+
+
+
+    public function handleForgot() {
+    session_start();
+    require_once 'mailer.php';
+
+    $email = $_POST['email'];
+    $user = new User();
+    $existing = $user->findByEmail($email);
+
+    if ($existing) {
+        $otp = random_int(100000, 999999);
+        $expires = date('Y-m-d H:i:s', strtotime('+1000 minutes'));
+
+        $user->setOTP($email, $otp, $expires);
+
+        if (sendOTPEmail($email, $otp)) {
+            $_SESSION['otp_email'] = $email;
+
+            header("Location: index.php?uri=verify-otp");
+            exit;
+        } else {
+            echo "Failed to send OTP email. Try again.";
+        }
+    } else {
+        echo "Email not found.";
+    }
+}
+
+
     public function reset() {
-        date_default_timezone_set('Asia/Manila'); 
+        date_default_timezone_set('Asia/Manila');
 
         session_start();
 
-        if (!isset($_GET['token'])) {
+        $token = $_GET['token'] ?? null;
+        $email = $_GET['email'] ?? null;  
+
+        if (!$token || !$email) {
             echo "Invalid reset link. <a href='index.php?uri=forgot'>Try again</a>";
             return;
         }
-
-        if (!isset($_SESSION['reset_email'])) {
-            echo "Email session expired. Please try again.";
-            return;
-        }
-
-        $token = $_GET['token'];
-        $email = $_SESSION['reset_email'];
 
         $user = new User();
         $found = $user->findByResetTokenAndEmail($token, $email);
 
         if ($found) {
-            // Here, $found will be populated by the data returned from the database
-            // Example of how $found can be used (assuming it's an associative array)
-            // $found = ['email' => 'example@email.com'];
+            $expiresAt = strtotime($found['token_expires_at']);
+            $now = time();
 
-            // Pass the found email to the view
-            $this->view('reset-password', ['email' => $found['email']]);
-        } else {
+            if ($expiresAt < $now) {
+                $newExpiry = date('Y-m-d H:i:s', strtotime('+90 minutes'));
+                $user->setResetToken($email, $token, $newExpiry);
+            }
+
+            $_SESSION['reset_email'] = $email;
+            $this->view('reset-password', ['email' => $email, 'token' => $token]);
+        } 
+        else {
             echo "Invalid or expired token. <a href='index.php?uri=forgot'>Try again</a>";
         }
     }
+
+
 
 
     public function handleReset() {
@@ -227,7 +228,7 @@ public function authenticate() {
         echo "Password updated successfully. <a href='index.php?uri=login'>Login</a>";
 
           echo <<<HTML
-                      <!DOCTYPE html>
+            <!DOCTYPE html>
             <html lang="en">
             <head>
             <meta charset="UTF-8">

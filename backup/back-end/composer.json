@@ -1,0 +1,12 @@
+{
+    "name": "tcker/back-end",
+    "description": "none",
+    "autoload": {
+        "psr-4": {
+            "Tcker\\BackEnd\\": "src/"
+        }
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.10"
+    }
+}
